@@ -29,3 +29,4 @@ Verified machine learning implementations completed on [TensorTonic](https://www
 
 View my verified ML profile: [TensorTonic profile](https://www.tensortonic.com/profile/luc723520)
 <!-- tensortonic:end -->
+Update pair programming
