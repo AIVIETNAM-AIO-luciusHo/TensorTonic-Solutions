@@ -1,0 +1,113 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{enumitem,booktabs,xcolor,hyperref,tabularx}
+\usepackage{amssymb}
+\setlist{itemsep=1pt,topsep=2pt}
+\title{Kế hoạch học FastAPI trên TensorTonic}
+\author{Hồ Văn Lực}
+\date{4 tuần $\cdot$ khoảng 8--10 giờ/tuần}
+
+\newcommand{\week}[2]{\section{Tuần #1: #2}}
+
+\begin{document}
+\maketitle
+
+\section*{Mục tiêu}
+Sau 4 tuần có thể tự xây dựng và triển khai một API phục vụ mô hình ML bằng FastAPI: có validation, xác thực, kiểm thử và Docker.
+
+\textbf{Cách dùng:} mỗi buổi làm theo vòng \emph{Đọc $\to$ Gõ lại ví dụ $\to$ Làm bài trên TensorTonic $\to$ Ghi chú lỗi}. Bài nào chưa pass thì ghi nguyên nhân vào nhật ký trước khi sang bài mới.
+
+\begin{tabularx}{\textwidth}{@{}lXl@{}}
+\toprule
+Tuần & Chủ đề chính & Sản phẩm cuối tuần \\
+\midrule
+1 & Nền tảng: Python hiện đại, HTTP, routing & CRUD in-memory \\
+2 & Pydantic, validation, xử lý lỗi & API có schema chặt \\
+3 & Dependency Injection, DB, xác thực & API có DB + JWT \\
+4 & Phục vụ mô hình ML, test, Docker & API dự đoán hoàn chỉnh \\
+\bottomrule
+\end{tabularx}
+
+\week{1}{Nền tảng và Routing}
+\subsection*{Nội dung cần học}
+\begin{itemize}
+  \item HTTP: method (GET/POST/PUT/PATCH/DELETE), status code, header, JSON.
+  \item Type hints, \texttt{async}/\texttt{await}, khác biệt \texttt{def} và \texttt{async def}.
+  \item Cài đặt \texttt{fastapi}, \texttt{uvicorn}; chạy \texttt{uvicorn main:app --reload}.
+  \item Path parameter, query parameter, request body cơ bản.
+  \item Swagger UI (\texttt{/docs}) và ReDoc (\texttt{/redoc}) tự sinh.
+\end{itemize}
+\subsection*{Bài tập}
+\begin{itemize}
+  \item Viết 5 endpoint CRUD cho \texttt{items} lưu trong \texttt{dict}.
+  \item Thêm phân trang \texttt{?skip=\&limit=}.
+\end{itemize}
+
+\week{2}{Pydantic, Validation và Lỗi}
+\subsection*{Nội dung cần học}
+\begin{itemize}
+  \item \texttt{BaseModel}, \texttt{Field} (ràng buộc \texttt{ge}, \texttt{le}, \texttt{min\_length}\ldots).
+  \item Validator tuỳ biến, model lồng nhau, \texttt{Optional}, \texttt{list}.
+  \item \texttt{response\_model}, tách schema \emph{Create/Read/Update}.
+  \item \texttt{HTTPException}, \texttt{exception\_handler}, mã 404/409/422.
+  \item \texttt{APIRouter} để chia module; \texttt{tags}, \texttt{prefix}.
+\end{itemize}
+\subsection*{Bài tập}
+\begin{itemize}
+  \item Refactor CRUD tuần 1 thành router + schema riêng.
+  \item Trả lỗi JSON thống nhất cho mọi exception.
+\end{itemize}
+
+\week{3}{Dependency Injection, Database, Xác thực}
+\subsection*{Nội dung cần học}
+\begin{itemize}
+  \item \texttt{Depends}: dùng chung session DB, tham số phân trang, người dùng hiện tại.
+  \item SQLAlchemy (hoặc SQLModel) + SQLite: model, session, truy vấn cơ bản.
+  \item Băm mật khẩu (\texttt{passlib}/\texttt{bcrypt}), OAuth2 password flow, JWT.
+  \item Middleware, CORS, \texttt{BackgroundTasks}.
+  \item Biến môi trường và cấu hình bằng \texttt{pydantic-settings}.
+\end{itemize}
+\subsection*{Bài tập}
+\begin{itemize}
+  \item Đăng ký / đăng nhập, endpoint bảo vệ bằng token.
+  \item Mỗi user chỉ thấy dữ liệu của mình.
+\end{itemize}
+
+\week{4}{Phục vụ ML, Test và Triển khai}
+\subsection*{Nội dung cần học}
+\begin{itemize}
+  \item Nạp mô hình một lần qua \texttt{lifespan} (không nạp mỗi request).
+  \item Endpoint \texttt{/predict}: schema đầu vào/ra, batch, xử lý input sai.
+  \item Upload file (\texttt{UploadFile}), streaming response.
+  \item Test với \texttt{pytest} + \texttt{TestClient}; ghi đè dependency khi test.
+  \item Docker hoá: \texttt{Dockerfile}, \texttt{uvicorn}/\texttt{gunicorn}, health-check.
+  \item Logging, đo độ trễ, giới hạn kích thước request.
+\end{itemize}
+\subsection*{Bài tập}
+\begin{itemize}
+  \item Phục vụ mô hình hồi quy/sigmoid đã làm trong repo này qua API.
+  \item Viết $\ge 8$ test, build và chạy container.
+\end{itemize}
+
+\section*{Nhật ký tiến độ}
+\begin{tabularx}{\textwidth}{@{}lXXc@{}}
+\toprule
+Ngày & Đã làm & Vướng mắc / bài học & Xong \\
+\midrule
+ & & & $\square$ \\
+ & & & $\square$ \\
+ & & & $\square$ \\
+\bottomrule
+\end{tabularx}
+
+\section*{Tiêu chí hoàn thành}
+\begin{itemize}
+  \item[$\square$] Giải thích được vòng đời một request trong FastAPI.
+  \item[$\square$] Mọi endpoint có schema vào/ra và mã lỗi rõ ràng.
+  \item[$\square$] Test pass, container chạy được.
+  \item[$\square$] Hoàn thành các bài FastAPI trên TensorTonic (đối chiếu danh sách bài trên nền tảng và điền vào đây).
+\end{itemize}
+\end{document}
