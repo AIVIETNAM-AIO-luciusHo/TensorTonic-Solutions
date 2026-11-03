@@ -2,7 +2,6 @@
 
   and deep learning problems from [TensorTonic](https://tensortonic.com).
 
-## What is TensorTonic?
 
 TensorTonic is a platform where you can implement core algorithms of Machine Learning from scratch.
 
