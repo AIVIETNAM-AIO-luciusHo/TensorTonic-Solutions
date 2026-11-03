@@ -1,10 +1,7 @@
 # TensorTonic Solutions
-
-
-
 TensorTonic is a platform where you can implement core algorithms of Machine Learning from scratch.
 
-This repository contains my personal solutions to these problems, automatically synchronized from the platform.
+ contains my personal solutions to these problems, automatically synchronized from the platform.
 
 <!-- tensortonic:start -->
 # Hồ Văn Lực's TensorTonic Solutions
