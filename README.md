@@ -1,6 +1,5 @@
 # TensorTonic Solutions
 
- problems from [TensorTonic](https://tensortonic.com).
 
 
 TensorTonic is a platform where you can implement core algorithms of Machine Learning from scratch.
