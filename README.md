@@ -1,6 +1,6 @@
 # TensorTonic Solutions
 
- find my solutions to various machine learning and deep learning problems from [TensorTonic](https://tensortonic.com).
+ various machine learning and deep learning problems from [TensorTonic](https://tensortonic.com).
 
 ## What is TensorTonic?
 
